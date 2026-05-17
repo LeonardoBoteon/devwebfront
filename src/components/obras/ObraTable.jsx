@@ -3,7 +3,12 @@ import { Search, Pencil, Trash2, BookImage } from "lucide-react";
 function ObraTable({ obras, searchTerm, onSearchChange, onEditar, onDeletar }) {
   const obrasFiltradas = obras.filter((o) => {
     const termo = searchTerm.toLowerCase();
-    return o.nome.toLowerCase().includes(termo) || o.ano.includes(termo);
+    return (
+      p.nome.toLowerCase().includes(termo) ||
+      (p.descricao && p.descricao.toLowerCase().includes(termo)) ||
+      // NOVO: busca também pelo nome da categoria
+      (p.categoria && p.categoria.nome.toLowerCase().includes(termo))
+    );
   });
 
   return (
@@ -42,6 +47,9 @@ function ObraTable({ obras, searchTerm, onSearchChange, onEditar, onDeletar }) {
               <th className="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider px-6 py-3">
                 Ano
               </th>
+              <th className="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider px-6 py-3">
+                Categoria
+              </th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100">
@@ -56,6 +64,15 @@ function ObraTable({ obras, searchTerm, onSearchChange, onEditar, onDeletar }) {
                   <span className="text-sm text-gray-500">
                     {obra.ano || "—"}
                   </span>
+                </td>
+                <td className="px-6 py-4">
+                  {obra.categoria ? (
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">
+                      {obra.categoria.nome}
+                    </span>
+                  ) : (
+                    <span className="text-xs text-gray-400">Sem categoria</span>
+                  )}
                 </td>
                 <td className="px-6 py-4">
                   <div className="flex items-center justify-center gap-2">

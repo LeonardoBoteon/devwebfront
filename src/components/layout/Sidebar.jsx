@@ -7,9 +7,8 @@ const menuItems = [
     to: "/categorias",
     label: "Categorias",
     icon: SquareLibrary,
-    enabled: false,
+    enabled: true,
   },
-  { to: "/detalhes", label: "Detalhes", icon: FileText, enabled: false },
 ];
 
 function Sidebar() {

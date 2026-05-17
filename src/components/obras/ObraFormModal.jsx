@@ -57,9 +57,6 @@ function ObraFormModal({
 
     if (obraEditando) {
       obra.id = obraEditando.id;
-      obra.categoriaId = obraEditando.categoriaId;
-      obra.artistaId = obraEditando.artistaId;
-      obra.galeriaId = obraEditando.galeriaId;
     }
 
     onSalvar(obra);

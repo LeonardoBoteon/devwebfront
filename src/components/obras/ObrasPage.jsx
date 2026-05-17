@@ -6,6 +6,7 @@ import {
   atualizarObra,
   deletarObra,
 } from "../../services/obraService";
+import { getCategorias } from "../../services/categoriaService";
 import { useToast } from "../../hooks/useToast";
 import ObraTable from "./ObraTable";
 import ObraFormModal from "./ObraFormModal";
@@ -15,6 +16,7 @@ function ObrasPage() {
   const [obras, setObras] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(true);
+  const [categorias, setCategorias] = useState([]);
 
   // Controle dos modais
   const [isFormModalOpen, setIsFormModalOpen] = useState(false);
@@ -32,13 +34,14 @@ function ObrasPage() {
   const carregarObras = async () => {
     try {
       setLoading(true);
-      const data = await getObras();
-      setObras(data);
+      const [dadosObras, dadosCategorias] = await Promise.all([
+        getObras(),
+        getCategorias.catch(() => []),
+      ]);
+      setObras(dadosObras);
+      setCategorias(dadosCategorias);
     } catch (error) {
-      toast.error(
-        "Não foi possível carregar as obras. Verifique se a API está rodando.",
-      );
-      console.error("Erro ao carregar obras:", error);
+      toast.error("Não foi possível carregar os dados.");
     } finally {
       setLoading(false);
     }
@@ -152,6 +155,7 @@ function ObrasPage() {
         }}
         obraEditando={obraEditando}
         onSalvar={handleSalvar}
+        categorias={categorias}
       />
 
       {/* Diálogo de confirmação de exclusão */}
