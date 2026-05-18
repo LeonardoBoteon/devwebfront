@@ -7,6 +7,8 @@ import {
   deletarObra,
 } from "../../services/obraService";
 import { getCategorias } from "../../services/categoriaService";
+import { getArtistas } from "../../services/artistaService";
+import { getGalerias } from "../../services/galeriaService";
 import { useToast } from "../../hooks/useToast";
 import ObraTable from "./ObraTable";
 import ObraFormModal from "./ObraFormModal";
@@ -18,6 +20,8 @@ function ObrasPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(true);
   const [categorias, setCategorias] = useState([]);
+  const [artistas, setArtistas] = useState([]);
+  const [galerias, setGalerias] = useState([]);
 
   // Controle dos modais
   const [isFormModalOpen, setIsFormModalOpen] = useState(false);
@@ -37,12 +41,16 @@ function ObrasPage() {
   const carregarObras = async () => {
     try {
       setLoading(true);
-      const [dadosObras, dadosCategorias] = await Promise.all([
+      const [dadosObras, dadosCategorias, dadosArtistas, dadosGalerias] = await Promise.all([
         getObras(),
         getCategorias().catch(() => []),
+        getArtistas().catch(() => []),
+        getGalerias().catch(() => []),
       ]);
       setObras(dadosObras);
       setCategorias(dadosCategorias);
+      setArtistas(dadosArtistas);
+      setGalerias(dadosGalerias);
     } catch (error) {
       toast.error("Não foi possível carregar os dados.");
     } finally {
@@ -174,6 +182,8 @@ function ObrasPage() {
         obraEditando={obraEditando}
         onSalvar={handleSalvar}
         categorias={categorias}
+        artistas={artistas}
+        galerias={galerias}
       />
 
       {/* Diálogo de confirmação de exclusão */}

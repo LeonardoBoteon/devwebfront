@@ -94,6 +94,7 @@ function ObraFormModal({
               className="block text-sm font-medium text-gray-700 mb-1"
             >
               Ano
+              <span className="text-gray-400 font-normal">(opcional)</span>
             </label>
             <input
               id="ano"

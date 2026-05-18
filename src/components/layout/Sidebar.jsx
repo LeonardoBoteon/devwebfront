@@ -1,14 +1,11 @@
 import { NavLink } from "react-router-dom";
-import { SquareKanban, Palette, SquareLibrary, FileText } from "lucide-react";
+import { SquareKanban, Palette, SquareLibrary, Building2, UserRound } from "lucide-react";
 
 const menuItems = [
   { to: "/obras", label: "Obras", icon: Palette, enabled: true },
-  {
-    to: "/categorias",
-    label: "Categorias",
-    icon: SquareLibrary,
-    enabled: true,
-  },
+  { to: "/categorias", label: "Categorias", icon: SquareLibrary, enabled: true },
+  { to: "/galerias", label: "Galerias", icon: Building2, enabled: true },
+  { to: "/artistas", label: "Artistas", icon: UserRound, enabled: true },
 ];
 
 function Sidebar() {
