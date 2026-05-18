@@ -24,8 +24,8 @@ export const criarObra = async (obra) => {
   return response.data;
 };
 
-export const atualizarObra = async (obra) => {
-  const response = await api.put("/", obra);
+export const atualizarObra = async (id, obra) => {
+  const response = await api.put(`/${id}`, obra);
   return response.data;
 };
 

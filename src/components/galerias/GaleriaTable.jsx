@@ -70,8 +70,8 @@ function GaleriaTable({
               >
                 <td className="px-6 py-4">
                   <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <span className="text-blue-700 text-xs font-bold">
+                    <div className="w-8 h-8 bg-amber-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <span className="text-amber-700 text-xs font-bold">
                         {galeria.nome.charAt(0).toUpperCase()}
                       </span>
                     </div>
@@ -103,7 +103,7 @@ function GaleriaTable({
                 </td>
 
                 <td className="px-6 py-4 text-center">
-                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-800">
                     {obrasPorGaleria(galeria.id)} obras
                   </span>
                 </td>

@@ -102,8 +102,8 @@ function GaleriasPage() {
     <div className="p-6">
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-            <Building2 className="w-5 h-5 text-blue-600" />
+          <div className="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center">
+            <Building2 className="w-5 h-5 text-amber-600" />
           </div>
           <div>
             <h1 className="text-xl font-bold text-gray-800">Galerias</h1>
@@ -126,7 +126,7 @@ function GaleriasPage() {
           </button>
           <button
             onClick={handleNovo}
-            className="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors shadow-sm"
+            className="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-white bg-amber-600 hover:bg-amber-700 rounded-lg transition-colors shadow-sm"
           >
             <Plus className="w-4 h-4" />
             Nova Galeria
@@ -136,7 +136,7 @@ function GaleriasPage() {
 
       {loading ? (
         <div className="flex items-center justify-center py-20">
-          <RefreshCw className="w-6 h-6 text-blue-500 animate-spin" />
+          <RefreshCw className="w-6 h-6 text-amber-500 animate-spin" />
           <span className="ml-3 text-gray-500">Carregando galerias...</span>
         </div>
       ) : (

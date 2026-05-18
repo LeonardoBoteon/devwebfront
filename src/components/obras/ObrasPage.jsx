@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Plus, RefreshCw, Images } from "lucide-react";
+import { Plus, RefreshCw, Palette } from "lucide-react";
 import {
   getObras,
   criarObra,
@@ -41,12 +41,13 @@ function ObrasPage() {
   const carregarObras = async () => {
     try {
       setLoading(true);
-      const [dadosObras, dadosCategorias, dadosArtistas, dadosGalerias] = await Promise.all([
-        getObras(),
-        getCategorias().catch(() => []),
-        getArtistas().catch(() => []),
-        getGalerias().catch(() => []),
-      ]);
+      const [dadosObras, dadosCategorias, dadosArtistas, dadosGalerias] =
+        await Promise.all([
+          getObras(),
+          getCategorias().catch(() => []),
+          getArtistas().catch(() => []),
+          getGalerias().catch(() => []),
+        ]);
       setObras(dadosObras);
       setCategorias(dadosCategorias);
       setArtistas(dadosArtistas);
@@ -71,7 +72,7 @@ function ObrasPage() {
   const handleSalvar = async (obra) => {
     try {
       if (obraEditando) {
-        await atualizarObra(obra);
+        await atualizarObra(obra.id, obra);
         toast.success(`Obra "${obra.nome}" atualizada com sucesso!`);
       } else {
         await criarObra(obra);
@@ -117,7 +118,7 @@ function ObrasPage() {
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-            <Images className="w-5 h-5 text-blue-600" />
+            <Palette className="w-5 h-5 text-blue-600" />
           </div>
           <div>
             <h1 className="text-xl font-bold text-gray-800">Obras</h1>
@@ -155,6 +156,8 @@ function ObrasPage() {
       ) : (
         <ObraTable
           obras={obras}
+          artistas={artistas}
+          galerias={galerias}
           searchTerm={searchTerm}
           onSearchChange={setSearchTerm}
           onEditar={handleEditar}

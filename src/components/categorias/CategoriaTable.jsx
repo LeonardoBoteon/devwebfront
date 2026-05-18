@@ -1,4 +1,4 @@
-import { Search, Pencil, Trash2, BookImage } from "lucide-react";
+import { Search, Pencil, Trash2, SquareLibrary } from "lucide-react";
 
 function CategoriaTable({
   categorias,
@@ -35,7 +35,7 @@ function CategoriaTable({
       {/* Estado vazio — quando não há categorias ou a busca não retorna resultados */}
       {categoriasFiltradas.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-16 text-gray-400">
-          <BookImage className="w-12 h-12 mb-3" />
+          <SquareLibrary className="w-12 h-12 mb-3" />
           <p className="text-sm font-medium">
             {searchTerm
               ? "Nenhuma categoria encontrada."

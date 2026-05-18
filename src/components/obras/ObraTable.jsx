@@ -1,7 +1,9 @@
-import { Search, Pencil, Trash2, BookImage, FileText } from "lucide-react";
+import { Search, Pencil, Trash2, Palette, FileText } from "lucide-react";
 
 function ObraTable({
   obras,
+  artistas = [],
+  galerias = [],
   searchTerm,
   onSearchChange,
   onEditar,
@@ -10,10 +12,14 @@ function ObraTable({
 }) {
   const obrasFiltradas = obras.filter((o) => {
     const termo = searchTerm.toLowerCase();
+    const artista = artistas.find((a) => a.id === o.artistaId);
+    const galeria = galerias.find((g) => g.id === o.galeriaId);
     return (
       o.nome.toLowerCase().includes(termo) ||
-      (o.descricao && o.descricao.toLowerCase().includes(termo)) ||
-      (o.categoria && o.categoria.nome.toLowerCase().includes(termo))
+      (o.ano && o.ano.toString().includes(termo)) ||
+      (o.categoria && o.categoria.nome.toLowerCase().includes(termo)) ||
+      (artista && artista.nome.toLowerCase().includes(termo)) ||
+      (galeria && galeria.nome.toLowerCase().includes(termo))
     );
   });
 
@@ -25,7 +31,7 @@ function ObraTable({
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
           <input
             type="text"
-            placeholder="Buscar por nome ou ano..."
+            placeholder="Buscar por nome, ano, categoria, artista ou galeria..."
             value={searchTerm}
             onChange={(e) => onSearchChange(e.target.value)}
             className="w-full pl-10 pr-4 py-2.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-shadow"
@@ -36,7 +42,7 @@ function ObraTable({
       {/* Tabela */}
       {obrasFiltradas.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-16 text-gray-400">
-          <BookImage className="w-12 h-12 mb-3" />
+          <Palette className="w-12 h-12 mb-3" />
           <p className="text-sm font-medium">
             {searchTerm
               ? "Nenhuma obra encontrada para esta busca."
