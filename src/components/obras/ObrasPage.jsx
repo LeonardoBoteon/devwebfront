@@ -11,6 +11,7 @@ import { useToast } from "../../hooks/useToast";
 import ObraTable from "./ObraTable";
 import ObraFormModal from "./ObraFormModal";
 import ObraDeleteDialog from "./ObraDeleteDialog";
+import DetalheModal from "./DetalheModal";
 
 function ObrasPage() {
   const [obras, setObras] = useState([]);
@@ -21,6 +22,8 @@ function ObrasPage() {
   // Controle dos modais
   const [isFormModalOpen, setIsFormModalOpen] = useState(false);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+  const [isDetalheModalOpen, setIsDetalheModalOpen] = useState(false);
+  const [obraDetalhes, setObraDetalhes] = useState(null);
   const [obraEditando, setObraEditando] = useState(null);
   const [obraDeletando, setObraDeletando] = useState(null);
 
@@ -36,7 +39,7 @@ function ObrasPage() {
       setLoading(true);
       const [dadosObras, dadosCategorias] = await Promise.all([
         getObras(),
-        getCategorias.catch(() => []),
+        getCategorias().catch(() => []),
       ]);
       setObras(dadosObras);
       setCategorias(dadosCategorias);
@@ -87,12 +90,17 @@ function ObrasPage() {
       await deletarObra(obraDeletando.id);
       toast.success(`Obra "${obraDeletando.nome}" removida com sucesso!`);
       setIsDeleteDialogOpen(false);
-      setObraeletando(null);
+      setObraDeletando(null);
       await carregarObras();
     } catch (error) {
       toast.error("Erro ao deletar a obra.");
       console.error("Erro ao deletar:", error);
     }
+  };
+
+  const handleVerDetalhes = (obra) => {
+    setObraDetalhes(obra); // Define qual produto terá detalhes visualizados
+    setIsDetalheModalOpen(true); // Abre o modal
   };
 
   return (
@@ -143,10 +151,20 @@ function ObrasPage() {
           onSearchChange={setSearchTerm}
           onEditar={handleEditar}
           onDeletar={handleConfirmarDelete}
+          onVerDetalhes={handleVerDetalhes}
         />
       )}
 
       {/* Modal de formulário (criar/editar) */}
+      <DetalheModal
+        isOpen={isDetalheModalOpen}
+        onClose={() => {
+          setIsDetalheModalOpen(false);
+          setObraDetalhes(null);
+        }}
+        obra={obraDetalhes}
+      />
+
       <ObraFormModal
         isOpen={isFormModalOpen}
         onClose={() => {

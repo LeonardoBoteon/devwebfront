@@ -96,7 +96,7 @@ function CategoriaTable({
                     {/* produtosPorCategoria é uma FUNÇÃO passada como prop.
                         Ela recebe o ID da categoria e retorna quantos produtos pertencem a ela.
                         A lógica fica no componente pai (CategoriasPage), não aqui na tabela. */}
-                    {produtosPorCategoria(categoria.id)} produtos
+                    {obrasPorCategoria(categoria.id)} produtos
                   </span>
                 </td>
 

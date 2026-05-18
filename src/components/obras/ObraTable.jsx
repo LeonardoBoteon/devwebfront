@@ -1,13 +1,19 @@
-import { Search, Pencil, Trash2, BookImage } from "lucide-react";
+import { Search, Pencil, Trash2, BookImage, FileText } from "lucide-react";
 
-function ObraTable({ obras, searchTerm, onSearchChange, onEditar, onDeletar }) {
+function ObraTable({
+  obras,
+  searchTerm,
+  onSearchChange,
+  onEditar,
+  onDeletar,
+  onVerDetalhes,
+}) {
   const obrasFiltradas = obras.filter((o) => {
     const termo = searchTerm.toLowerCase();
     return (
-      p.nome.toLowerCase().includes(termo) ||
-      (p.descricao && p.descricao.toLowerCase().includes(termo)) ||
-      // NOVO: busca também pelo nome da categoria
-      (p.categoria && p.categoria.nome.toLowerCase().includes(termo))
+      o.nome.toLowerCase().includes(termo) ||
+      (o.descricao && o.descricao.toLowerCase().includes(termo)) ||
+      (o.categoria && o.categoria.nome.toLowerCase().includes(termo))
     );
   });
 
@@ -76,6 +82,13 @@ function ObraTable({ obras, searchTerm, onSearchChange, onEditar, onDeletar }) {
                 </td>
                 <td className="px-6 py-4">
                   <div className="flex items-center justify-center gap-2">
+                    <button
+                      onClick={() => onVerDetalhes(obra)}
+                      title="Ver detalhes"
+                      className="p-2 text-purple-600 hover:bg-purple-50 rounded-lg transition-colors"
+                    >
+                      <FileText className="w-4 h-4" />
+                    </button>
                     <button
                       onClick={() => onEditar(obra)}
                       title="Editar obra"

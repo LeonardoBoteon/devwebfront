@@ -35,14 +35,12 @@ function CategoriasPage() {
 
       const [dadosCategorias, dadosObras] = await Promise.all([
         getCategorias(),
-        getProdutos(),
+        getObras(),
       ]);
       setCategorias(dadosCategorias);
       setObras(dadosObras);
     } catch (error) {
-      toast.error(
-        "Não foi possível carregar os dados. Verifique se a API está rodando.",
-      );
+      toast.error("Não foi possível carregar os dados.");
       console.error("Erro ao carregar:", error);
     } finally {
       setLoading(false);
